@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-@startuml
 int main()
 {
 	Engine::init();
@@ -14,4 +13,3 @@ int main()
 	system("pause");
 	return 0;
 }
-@enduml

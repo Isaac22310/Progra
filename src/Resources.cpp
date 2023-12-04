@@ -41,7 +41,7 @@ void Resources::load()
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			LabyrinthPieces[index] = new sf::Sprite(Labyrinth, sf::IntRect(i * 1, j * 1, 1, 1));
+			LabyrinthPieces[index] = new sf::Sprite(Labyrinth, sf::IntRect(i * 2, j * 2, 2, 2));
 			LabyrinthPieces[index]->setScale(2.0f, 2.0f);
 			index++;
 		}
