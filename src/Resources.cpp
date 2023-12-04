@@ -34,20 +34,20 @@ const int Resources::DeadPacMan = 21;
 
 void Resources::load()
 {
-	Labyrinth.loadFromFile("textures/labyrinth.png");
+	Labyrinth.loadFromFile("assets/Textures/labyrinth.png");
 
 	int index = 0;
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			LabyrinthPieces[index] = new sf::Sprite(Labyrinth, sf::IntRect(i * 8, j * 8, 8, 8));
+			LabyrinthPieces[index] = new sf::Sprite(Labyrinth, sf::IntRect(i * 1, j * 1, 1, 1));
 			LabyrinthPieces[index]->setScale(2.0f, 2.0f);
 			index++;
 		}
 	}
 
-	Things.loadFromFile("textures/things.png");
+	Things.loadFromFile("assets/Textures/things.png");
 
 	loadSprite(Resources::PacMan, 0, 0, 3);
 	loadSprite(Resources::PacManDown, 45, 0, 3);
