@@ -7,3 +7,9 @@ Fue necesaria la instalación de MSYS2 y su actualización con los siguientes co
 pacman -Syu
 pacman -Su
 pacman -S mingw-w64-x86_64-toolchain
+
+para ejecutar en otra PC crear carpeta temp y checar que este vacia
+
+terminal command promp
+
+ejecutar comando make run
