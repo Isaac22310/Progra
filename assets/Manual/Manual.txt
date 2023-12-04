@@ -1,0 +1,9 @@
+Bienvenido a nuestro codigo de pacman 
+Escrito en lenguaje c++ con libreria externa sfml
+Este proyecto esta guiado con el siguiente tutorial https://youtu.be/4AatUPAXrj8?feature=shared
+
+Fue necesaria la instalación de MSYS2 y su actualización con los siguientes comandos
+
+pacman -Syu
+pacman -Su
+pacman -S mingw-w64-x86_64-toolchain
