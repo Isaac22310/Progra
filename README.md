@@ -29,5 +29,3 @@ ejecutar comando make run
 Codigo que hace que compile con la version 17
 
 -std=c++17
-
-Proyecto pacman final
