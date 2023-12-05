@@ -13,3 +13,5 @@ para ejecutar en otra PC crear carpeta temp y checar que este vacia
 terminal command promp
 
 ejecutar comando make run
+
+Codigo que hace que compile con la version 17

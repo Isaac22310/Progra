@@ -1,0 +1,216 @@
+@startuml
+class Animation
+{
+-bounds:IntRect*
+-frames:int
+-Clock:clock
+-resetValue:int
+
++Animation(sf::IntRect* rect, int framesNumber)
++changeFrame(): void
++getBounds():IntRect 
+}
+
+class Console
+{
+-std::string m_name:
+
++Console(std::string name)
++writeLine(std::string line):void
+}
+
+class Engine
+{
+private:
+-RenderWindow window: static	
+-Console console: static
+-stStateManager gamestates: static
+
+public:
++init(): static void 
++isRunning(): static bool
++handleEvents(): static void
++render(): static void
+}
+
+class Entity
+{
+-screenPosX: float
+-screenPosY: float
+-tileX: int
+-tileY: int
+
++Entity(int tilePosX, int tilePosY):
+
++getScreenPosX(): float
++getScreenPosY(): float
++getTileX(): int
++getTileY(): int
+
++move(float x, float y): void
++teleport(int x, int y): void
+}
+
+class GameState
+{
++init() {}: virtual void
++loop() = 0: virtual void
++render(sf::RenderWindow* window) = 0: virtual void
++keyPressed(int code) = 0:virtual  void
++keyReleased(int code) = 0: virtual void
+}
+
+Entity<|--Ghost
+class Ghost 
+{
+-destinationTileX: int
+-destinationTileY: int
+-Direction moving:
+
+-scattering: bool
+-outOfCage: bool
+
+-decision: bool
+
+-frightened: int
+
++Ghost(int tilePosX, int tilePosY, int destinationX, int destinationY):
+
++setDestination(int x, int y): void
++getDestX(): int
++getDestY(): int
+
++setDirection(Direction dir): void
++Direction getDirection():
++move(): void
+
++isScattering(): bool
++setScattering(bool s): void
+	
++isOutOfCage(): bool
+
++shouldTakeDecision(): bool
++setTakeDecision(bool d): void
+
++teleport(int x, int y): void
+
++setFrightened(bool f): void
++isFrightened(): bool
+}
+
+class Labyrinth
+{
++ SizeX: static const int
++ SizeY: static const int
+
++Labyrinth():
++getTileCode(int x, int y): int
+	
++tileBlocksEntity(int x, int y): bool
++isIntersection(int x, int y): bool
+
++removeDot(PacMan* pacman, Ghost* ghost1, Ghost* ghost2, Ghost* ghost3, Ghost* ghost4): void
+
+-tiles[SizeX][SizeY]: int
+}
+
+Entity<|--PacMan
+class PacMan
+{
+
+-std::queue<Direction> directions:
+-eatenDots: int
+-dead: bool
+
++PacMan():
+
++queueDirection(Direction dir): void
++move(): void
++getDirections():queue<Direction>
++stop(): void
+
++eatDot(): void
++getDotsEaten(): int
+
++setDead(bool d): void
++isDead(): bool
+}
+
+GameState<|--PlayingState
+class PlayingState
+{
+-Console* console:
+-Labyrinth* labyrinth:
+-PacMan* pacman:
+-Ghost* blinky:
+-Ghost* pinky:
+-Ghost* inky:
+-Ghost* clyde:
+
+-waitTime: int
+
+-pacmanCanMove(): bool
+-handleGhostMovement(Ghost* ghost): void
+-ghostCanMove(Ghost* ghost): bool
+-calculateDistance(Ghost* ghost, int addX, int addY): float
+-teleportTunnels(Entity* entity): void
+-handleGhostFrightening(Ghost* ghost): void
+
++init(): void
++loop(): void
++render(sf::RenderWindow* window): void
++keyPressed(int code): void
++keyReleased(int code): void
+}
+
+class Resources
+{
+-Texture Things: static
+-Texture Labyrinth: static
+-Console Console: static
+
+-static std::map<int, sf::Sprite*> sprites:
+-static std::map<int, Animation> animations:
+
+-loadSprite(int value, int rect1, int rect2, int animationframes): static void
+
+-PacManDown:static const int
+-PacManLeft: static const int
+-PacManRight: static const int
+-BlinkyDown: static const int
+-BlinkyLeft: static const int
+-BlinkyRight: static const int
+-PinkyDown: static const int
+-PinkyLeft: static const int
+-PinkyRight: static const int
+-InkyDown: static const int
+-InkyLeft: static const int
+-InkyRight: static const int
+-ClydeDown: static const int
+-ClydeLeft: static const int
+-ClydeRight: static const int
+
++load():static void 
++Sprite* get(int value, bool animated, Direction facing): static
+
++Sprite* LabyrinthPieces[]: static
+
++PacMan: static const int
++Blinky: static const int
++Pinky: static const int
++Inky: static const int
++Clyde: static const int
++FrightenedGhost: static const int
++DeadPacMan: static const int
+}
+
+class StateManager
+{
+-std::stack<GameState*> states:
++addState(GameState* state): void
++loop(): void
++render(sf::RenderWindow* window): void
++keyPressed(int code): void
++keyReleased(int code): void
+}
+@enduml
