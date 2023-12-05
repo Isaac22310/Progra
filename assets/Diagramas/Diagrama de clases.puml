@@ -21,12 +21,10 @@ class Console
 
 class Engine
 {
-private:
--RenderWindow window: static	
--Console console: static
--stStateManager gamestates: static
+-window: static RenderWindow	
+-console: static Console 
+-gamestates: static StateManager
 
-public:
 +init(): static void 
 +isRunning(): static bool
 +handleEvents(): static void
@@ -40,7 +38,7 @@ class Entity
 -tileX: int
 -tileY: int
 
-+Entity(int tilePosX, int tilePosY):
++Entity(int tilePosX, int tilePosY)
 
 +getScreenPosX(): float
 +getScreenPosY(): float
@@ -65,7 +63,7 @@ class Ghost
 {
 -destinationTileX: int
 -destinationTileY: int
--Direction moving:
+-moving: Direction 
 
 -scattering: bool
 -outOfCage: bool
@@ -74,7 +72,7 @@ class Ghost
 
 -frightened: int
 
-+Ghost(int tilePosX, int tilePosY, int destinationX, int destinationY):
++Ghost(int tilePosX, int tilePosY, int destinationX, int destinationY)
 
 +setDestination(int x, int y): void
 +getDestX(): int
@@ -139,13 +137,13 @@ class PacMan
 GameState<|--PlayingState
 class PlayingState
 {
--Console* console:
--Labyrinth* labyrinth:
--PacMan* pacman:
--Ghost* blinky:
--Ghost* pinky:
--Ghost* inky:
--Ghost* clyde:
+-console: Console*
+-labyrinth: Labyrinth*
+-pacman: PacMan*
+-blinky: Ghost* 
+-pinky: Ghost* 
+-inky: Ghost* 
+-clyde: Ghost* 
 
 -waitTime: int
 
@@ -165,9 +163,9 @@ class PlayingState
 
 class Resources
 {
--Texture Things: static
--Texture Labyrinth: static
--Console Console: static
+-Things: static Texture 
+-Labyrinth: static Texture 
+-Console: static Console
 
 -static std::map<int, sf::Sprite*> sprites:
 -static std::map<int, Animation> animations:
@@ -190,10 +188,10 @@ class Resources
 -ClydeLeft: static const int
 -ClydeRight: static const int
 
-+load():static void 
-+Sprite* get(int value, bool animated, Direction facing): static
++load(): static void 
++get(int value, bool animated, Direction facing): static Sprite* 
 
-+Sprite* LabyrinthPieces[]: static
++LabyrinthPieces[]: static Sprite*
 
 +PacMan: static const int
 +Blinky: static const int
@@ -213,4 +211,17 @@ class StateManager
 +keyPressed(int code): void
 +keyReleased(int code): void
 }
+
+Engine --> StateManager
+Engine --> Console
+
+Ghost --> Direction
+
+PlayingState --> Console
+PlayingState --> PacMan
+PlayingState --> Labyrinth
+PlayingState --> Ghost
+
+Resources --> Console
+
 @enduml
